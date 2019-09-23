@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdv_test_image"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:retryImage="@mipmap/ic_retry"
+        app:retryImageScaleType="centerCrop"
+        app:fadeDuration="400"
+        app:actualImageScaleType="centerCrop"
+        android:scaleType="centerCrop"
+        app:roundAsCircle="true"
+        app:roundedCornerRadius="1.5dp"
+        app:roundingBorderColor="#404040"
+        />
+
+    <!--<com.facebook.drawee.view.SimpleDraweeView-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="200dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:fadeDuration="400"-->
+        <!--app:progressBarImage="@drawable/ic_fp_40px"-->
+        <!--app:placeholderImage="@drawable/cat1"-->
+        <!--app:placeholderImageScaleType="fitXY"-->
+        <!--app:failureImage="@drawable/cat2"-->
+        <!--app:failureImageScaleType="fitXY"-->
+        <!--android:scaleType="centerCrop"-->
+        <!--app:overlayImage="@drawable/cat_wink"-->
+        <!--app:pressedStateOverlayImage="@drawable/sky"-->
+        <!--app:roundAsCircle="false"-->
+        <!--app:roundedCornerRadius="1.5dp"-->
+        <!--app:roundingBorderColor="#404040"-->
+
+        <!--/>-->
+
+</android.support.constraint.ConstraintLayout>

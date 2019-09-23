@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.example.zhaojing5.myapplication.View.InterceptLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#aa00ff00">
+        <com.example.zhaojing5.myapplication.View.DisallowInterceptButton
+            android:id="@+id/btn_distribute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="test distribute"/>
+    </com.example.zhaojing5.myapplication.View.InterceptLinearLayout>
+
+</LinearLayout>

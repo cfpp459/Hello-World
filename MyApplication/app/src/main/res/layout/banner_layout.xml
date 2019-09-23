@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.example.zhaojing5.myapplication.View.banner.Banner
+        android:id="@+id/banner_banner_view"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        app:indicator_height="8dp"
+        app:indicator_width="46dp"
+        app:indicator_margin="5dp"
+        app:indicator_drawable_unselected="@drawable/banner_bottom_unselected_icon"
+        app:indicator_drawable_selected="@drawable/banner_bottom_selected_icon" />
+
+</android.support.constraint.ConstraintLayout>

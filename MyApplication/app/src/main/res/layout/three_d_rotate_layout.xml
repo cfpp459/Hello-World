@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.example.zhaojing5.myapplication.View.Custom3DView
+        android:layout_height="250dp"
+        android:layout_width="250dp"
+        android:layout_centerInParent="true"
+        >
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/cat1"
+            />
+        <ImageView
+            android:id="@+id/img1"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/cat2"
+            />
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/cat3"
+            />
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/cat4"
+            />
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/cat5"
+            />
+    </com.example.zhaojing5.myapplication.View.Custom3DView>
+
+</RelativeLayout>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.MainActivity"
+        android:background="#ffffff">
+
+        <Button
+            android:id="@+id/btn_fresco"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:visibility="visible"
+            android:text="goto fresco" />
+
+        <Button
+            android:id="@+id/btn_loopimageview"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:visibility="visible"
+            android:text="goto LoopImageView"
+            app:layout_constraintTop_toBottomOf="@+id/btn_fresco"/>
+
+        <Button
+            android:id="@+id/btn_pullable_layout"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:visibility="visible"
+            android:text="goto PullableLayout"
+            app:layout_constraintTop_toBottomOf="@+id/btn_loopimageview"/>
+        <Button
+            android:id="@+id/btn_goto_finger"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="goto finger"
+            app:layout_constraintTop_toBottomOf="@+id/btn_pullable_layout">
+        </Button>
+        <Button
+            android:id="@+id/btn_goto_count_view"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_goto_finger"
+            android:text="CountView" >
+        </Button>
+        <Button
+            android:id="@+id/btn_my3d"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_goto_count_view"
+            android:text="my 3d"
+            android:gravity="center">
+        </Button>
+        <Button
+            android:id="@+id/btn_distribute"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_my3d"
+            android:text="distribute"
+            android:gravity="center">
+        </Button>
+        <Button
+            android:id="@+id/btn_three_d"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_distribute"
+            android:text="3D_Box"
+            android:gravity="center">
+
+        </Button>
+        <Button
+            android:id="@+id/btn_rotate_pic"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_three_d"
+            android:text="3D Anim"
+            android:gravity="center">
+
+        </Button>
+        <Button
+            android:id="@+id/btn_test"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_rotate_pic"
+            android:text="test button"
+            android:gravity="center">
+
+        </Button>
+        <Button
+            android:id="@+id/btn_popView"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_test"
+            android:text="弹幕实现"
+            android:gravity="center">
+
+        </Button>
+        <EditText
+            android:id="@+id/et_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_popView"
+            android:paddingLeft="2dp"
+            android:background="@drawable/edit_text_type"
+            android:hint="lay-list实现仿微信输入框"
+            />
+
+        <Button
+            android:id="@+id/btn_callClientApk"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/et_input"
+            android:text="调用其它apk"
+            android:gravity="center">
+
+        </Button>
+        <Button
+            android:id="@+id/start_float_window"
+            app:layout_constraintTop_toBottomOf="@+id/btn_callClientApk"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="悬浮窗效果" >
+        </Button>
+        <Button
+            android:id="@+id/start_slide_menu"
+            app:layout_constraintTop_toBottomOf="@+id/start_float_window"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="侧滑菜单实现" >
+        </Button>
+        <Button
+            android:id="@+id/btn_snackbar"
+            app:layout_constraintTop_toBottomOf="@+id/start_slide_menu"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="snackbar" >
+        </Button>
+        <Button
+            android:id="@+id/btn_notification"
+            app:layout_constraintTop_toBottomOf="@+id/btn_snackbar"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="notification" >
+        </Button>
+        <Button
+            android:id="@+id/btn_volley"
+            app:layout_constraintTop_toBottomOf="@+id/btn_notification"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="volley" >
+        </Button>
+        <Button
+            android:id="@+id/btn_sliding_menu"
+            app:layout_constraintTop_toBottomOf="@+id/btn_volley"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="sliding menu activity" >
+        </Button>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
+
+
+

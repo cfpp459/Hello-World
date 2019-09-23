@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Button
+        android:id="@+id/btn_getHttp"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:text="get request"/>
+    <Button
+        android:id="@+id/btn_postHttp"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_getHttp"
+        android:text="post request"/>
+
+    <Button
+        android:id="@+id/btn_responseJson"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_postHttp"
+        android:text="json request"/>
+
+    <Button
+        android:id="@+id/btn_imageLoader"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_responseJson"
+        android:text="ImageLoader"/>
+
+    <ImageView
+        android:id="@+id/iv_imageloader"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintLeft_toRightOf="@id/btn_imageLoader"
+        android:src="@mipmap/ic_launcher"/>
+
+    <Button
+        android:id="@+id/btn_networkImage"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_imageLoader"
+        android:text="NetWorkImage"/>
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/networkImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintLeft_toRightOf="@id/btn_networkImage"
+        app:layout_constraintTop_toBottomOf="@id/iv_imageloader"
+        />
+    <com.example.zhaojing5.myapplication.View.CountView
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_networkImage">
+    </com.example.zhaojing5.myapplication.View.CountView>
+</android.support.constraint.ConstraintLayout>

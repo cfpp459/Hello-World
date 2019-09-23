@@ -1,0 +1,6 @@
+println "--->settings.gralde start"
+include ':app', ':dlproject'
+include 'Javalib'
+include 'myapplication2'
+println "--->settings.gralde end"
+

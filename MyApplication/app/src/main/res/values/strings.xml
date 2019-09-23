@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="dexPathError">dex path is error or other error.</string>
+    <string name="testString">test string</string>
+    <string name="menu_search">search</string>
+    <string name="menu_plus">plus</string>
+    <string name="menu_album">album</string>
+    <string name="menu_collection">collection</string>
+    <string name="menu_card">card</string>
+    <string name="menu_setting">settings</string>
+    <string name="menu_feed">feed</string>
+    <string name="menu_toast">click the menu</string>
+    <string name="menu_title">微信</string>
+    <string name="action_compose">编辑</string>
+    <string name="action_delete">删除</string>
+    <string name="action_settings">设置</string>
+    <string name="action_share">分享</string>
+    <string name="action_myProvider">MyProvider</string>
+    <string name="banner_play_next_delay">%1$sS后播放下一个</string>
+</resources>

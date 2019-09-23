@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xlnms="" xmlns:zhaojing="http://schemas.android.com/tools">
+    <array name="colorArray" >
+        <item>123</item>
+        <item>123</item>
+    </array>
+    <string-array name="resName">
+        <item>res1</item>
+        <item>res2</item>
+        <item>res3</item>
+    </string-array>
+    <attr name="newViewWiget">
+    </attr>
+</resources>

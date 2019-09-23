@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.example.zhaojing5.myapplication.View.PaintShaderView
+        android:id="@+id/count_view"
+        android:layout_width="match_parent"
+        android:layout_height="450dp" />
+    <com.example.zhaojing5.myapplication.View.My3DView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:background="#aa00ff00"
+        android:layout_below="@+id/count_view"
+        app:picNum="4">
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/cat1"
+            />
+        <ImageView
+            android:id="@+id/img1"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/cat2"
+            />
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/cat3"
+            />
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/cat4"
+            />
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/cat5"
+            />
+    </com.example.zhaojing5.myapplication.View.My3DView>
+</RelativeLayout>

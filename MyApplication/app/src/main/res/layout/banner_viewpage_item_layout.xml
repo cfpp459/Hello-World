@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    app:cardPreventCornerOverlap="false"
+    android:clipChildren="true"
+    app:cardCornerRadius="14dp">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="true"
+        android:background="@drawable/banner_item_default_bg">
+
+        <com.zhidaohulian.welfare.car.ui.view.RoundedImageView
+            android:id="@+id/banner_iv_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:riv_corner_radius="14dp"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout
+            android:id="@+id/task_desc_nvi_back_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/banner_item_bottom_button_container"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/banner_button_container_bg"
+            android:paddingTop="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/banner_first_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/banner_item_bottom_button_padding"
+                android:paddingRight="@dimen/banner_item_bottom_button_padding"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:background="@drawable/banner_first_btn_bg"
+                android:layout_marginRight="50dp"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/banner_item_bottom_button_font_size"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/banner_second_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/banner_item_bottom_button_padding"
+                android:paddingRight="@dimen/banner_item_bottom_button_padding"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:background="@drawable/banner_second_btn_bg"
+                android:textColor="@android:color/white"
+                android:visibility="gone"
+                android:textSize="@dimen/banner_item_bottom_button_font_size" />
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>
