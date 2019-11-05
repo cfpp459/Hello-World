@@ -166,11 +166,14 @@ public class MainActivity extends AppCompatActivity{
     @OnClick({R.id.btn_popView,R.id.btn_callClientApk,R.id.start_slide_menu,R.id.btn_snackbar,
             R.id.btn_notification,R.id.btn_volley,R.id.btn_goto_count_view,R.id.btn_sliding_menu,
             R.id.btn_rotate_pic,R.id.btn_three_d,R.id.btn_distribute,R.id.btn_my3d,R.id.btn_goto_finger,
-            R.id.btn_pullable_layout,R.id.btn_loopimageview,R.id.btn_fresco})
+            R.id.btn_pullable_layout,R.id.btn_loopimageview,R.id.btn_fresco,R.id.btn_rxjava})
     public void onClick(View v) {
         Log.d(TAG,"click view " + v.getId());
         Intent intent = null;
         switch(v.getId()){
+            case R.id.btn_rxjava:
+                startActivity(new Intent(this, RxJavaActivity.class));
+                break;
             case R.id.btn_fresco:
                 startActivity(new Intent(this, TestFrescoActivity.class));
                 break;

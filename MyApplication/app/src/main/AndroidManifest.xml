@@ -60,6 +60,7 @@
         <activity android:name=".activity.PullableActivity"/>
         <activity android:name=".activity.LooperImageViewActivity"/>
         <activity android:name=".fresco.TestFrescoActivity"/>
+        <activity android:name=".activity.RxJavaActivity"/>
 
         <!-- service -->
         <service android:name=".service.JPushMessageService"/>

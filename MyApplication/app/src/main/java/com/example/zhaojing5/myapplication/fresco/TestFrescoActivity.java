@@ -122,13 +122,6 @@ public class TestFrescoActivity extends AppCompatActivity {
 
     }
 
-    private void getCacheSize(){
-        ImagePipelineConfig.Builder builder = ImagePipelineConfig.newBuilder(this);
-
-
-//        Log.d("zhaojing","disk cache is "  + );
-    }
-
     /***
      * view
      */
