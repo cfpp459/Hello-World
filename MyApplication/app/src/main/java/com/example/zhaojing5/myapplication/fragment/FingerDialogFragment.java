@@ -1,5 +1,6 @@
 package com.example.zhaojing5.myapplication.fragment;
 
+import android.annotation.TargetApi;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
@@ -18,6 +19,13 @@ import com.example.zhaojing5.myapplication.activity.LoginActivity;
 
 import javax.crypto.Cipher;
 
+/***
+ * 8.0之前，指纹只能错误5次，达到5次时会禁止指纹认证，同时开启30秒倒计时，等待结束后重置错误计数，继续认证
+ * 8.0之后，依然是每错误5次就会倒计时30秒，然而30秒结束后错误计数并不会被清空，
+ * 8.0上加入了最大20次的限制，累计错误20次之后就无法使用指纹认证功能了，只能用密码的方式才能重置错误计数
+ * 9.0之后FingerprintManager被抛弃了
+ */
+@TargetApi(23)
 public class FingerDialogFragment extends DialogFragment {
 
     private FingerprintManager fingerprintManager;

@@ -3,6 +3,7 @@ package com.example.zhaojing5.myapplication.activity;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.KeyguardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import com.example.zhaojing5.myapplication.R;
 import com.example.zhaojing5.myapplication.Utils.ToastUtils;
@@ -39,15 +41,17 @@ public class LoginActivity extends Activity {
 
     public boolean supportFingerPrint(){
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
+            //官方Android 6.0及以上才支持指纹功能
             ToastUtils.showToast(this,"您的系统版本过低，不支持指纹功能！");
             return false;
         }else{
-            KeyguardManager keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+            KeyguardManager keyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
             FingerprintManager fingerprintManager = getSystemService(FingerprintManager.class);
             if(!fingerprintManager.isHardwareDetected()){
                 ToastUtils.showToast(this,"您的手机不支持指纹功能");
                 return false;
             }else if(!keyguardManager.isKeyguardSecure()){
+                //如果没设置密码，指纹又没通过，那么就没有办法打开手机了，所以指纹认证的前提是要设置锁屏密码
                 ToastUtils.showToast(this,"您还未设置锁屏，请先设置并添加一个指纹！");
                 return false;
             }else if(!fingerprintManager.hasEnrolledFingerprints()){
@@ -58,6 +62,9 @@ public class LoginActivity extends Activity {
         return true;
     }
 
+    /***
+     * 初始化生成对称加密的key
+     */
     @TargetApi(23)
     private void initKey(){
         try {
@@ -68,11 +75,16 @@ public class LoginActivity extends Activity {
                     .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
                     .setUserAuthenticationRequired(true)
                     .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_PKCS7);
+            keyGenerator.init(builder.build());
+            keyGenerator.generateKey();
         }catch (Exception e){
-
+            throw new RuntimeException(e);
         }
     }
 
+    /***
+     * 初始化生成一个cipher对象
+     */
     @TargetApi(23)
     private void initCipher(){
         try {
@@ -81,7 +93,7 @@ public class LoginActivity extends Activity {
             cipher.init(Cipher.ENCRYPT_MODE,key);
             showFingerPrintDialog(cipher);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
