@@ -5,4 +5,10 @@
     <color name="colorAccent">#FF4081</color>
     <color name="notselect">#ffccff</color>
     <color name="selected">#ff6666</color>
+
+    <color name="bg_biometric_prompt_dialog">#99000000</color>
+    <color name="text_quaternary">#CDCED0</color>
+    <color name="text_red">#FF5555</color>
+    <color name="text_green">#82C785</color>
+
 </resources>

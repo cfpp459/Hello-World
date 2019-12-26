@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.zhaojing5.myapplication.R;
 import com.example.zhaojing5.myapplication.Utils.ToastUtils;
+import com.example.zhaojing5.myapplication.biometric.BiometricPromptManager;
 import com.example.zhaojing5.myapplication.fragment.FingerDialogFragment;
 
 import java.security.KeyStore;
@@ -33,10 +34,43 @@ public class LoginActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
-        if(supportFingerPrint()){
-            initKey();
-            initCipher();
+
+        BiometricPromptManager biometricPromptManager = BiometricPromptManager.from(this);
+        if(biometricPromptManager.isBiometricPromptEnable()){
+            biometricPromptManager.authenticate(new BiometricPromptManager.OnBiometricIdentifyCallback() {
+                @Override
+                public void onUsePassword() {
+                    ToastUtils.showToast(LoginActivity.this, "use password...");
+                }
+
+                @Override
+                public void onSucceeded() {
+                    onAuthenticated();
+                }
+
+                @Override
+                public void onFailed() {
+                    ToastUtils.showToast(LoginActivity.this, "onFailed...");
+                }
+
+                @Override
+                public void onError(int code, String reason) {
+                    ToastUtils.showToast(LoginActivity.this, "onError...");
+                }
+
+                @Override
+                public void onCancel() {
+                    ToastUtils.showToast(LoginActivity.this, "onCancel...");
+                }
+            });
         }
+
+        //直接使用 FingerprintManager
+//        if(supportFingerPrint()){
+//            initKey();
+//            initCipher();
+//        }
+
     }
 
     public boolean supportFingerPrint(){

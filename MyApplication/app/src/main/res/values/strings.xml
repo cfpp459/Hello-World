@@ -17,4 +17,16 @@
     <string name="action_share">分享</string>
     <string name="action_myProvider">MyProvider</string>
     <string name="banner_play_next_delay">%1$sS后播放下一个</string>
+
+    //biometricprompt
+    <string name="biometric_dialog_cancel">Cancel</string>
+    <string name="biometric_dialog_title">Verification</string>
+    <string name="biometric_dialog_subtitle">Verify fingerprint to continue</string>
+    <string name="biometric_dialog_state_normal">Fingerprint sensor</string>
+    <string name="biometric_dialog_state_failed">Failed to identify, please try again</string>
+    <string name="biometric_dialog_state_error">Verification error, please enter payment password</string>
+    <string name="biometric_dialog_state_error_enable_process">Verification error, setup failed</string>
+    <string name="biometric_dialog_state_succeeded">Verification successful</string>
+    <string name="biometric_dialog_use_password">Use Password</string>
+
 </resources>
