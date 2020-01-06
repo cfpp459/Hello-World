@@ -7,7 +7,6 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.app.PendingIntent;
-import android.support.v7.app.ActionBar;
 import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -22,8 +21,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -50,19 +47,16 @@ import android.widget.Button;
 import android.widget.SearchView;
 
 import com.example.zhaojing5.myapplication.BuildConfig;
-import com.example.zhaojing5.myapplication.CodeStandard;
 import com.example.zhaojing5.myapplication.R;
-import com.example.zhaojing5.myapplication.TestApplication;
+import com.example.zhaojing5.myapplication.MainApplication;
 import com.example.zhaojing5.myapplication.Utils.FileUtils;
+import com.example.zhaojing5.myapplication.Utils.FileVisitorUtil;
+import com.example.zhaojing5.myapplication.Utils.MultiKnowledgePoint;
 import com.example.zhaojing5.myapplication.Utils.ToastUtils;
 import com.example.zhaojing5.myapplication.View.UseHttpActivity;
 import com.example.zhaojing5.myapplication.bean.UserInfo;
 import com.example.zhaojing5.myapplication.dl.ProxyActivity;
-import com.example.zhaojing5.myapplication.floatWindow.FloatWindowService;
 import com.example.zhaojing5.myapplication.fresco.TestFrescoActivity;
-import com.example.zhaojing5.myapplication.menu.AlbumFragment;
-import com.example.zhaojing5.myapplication.menu.ArtistFragment;
-import com.example.zhaojing5.myapplication.menu.MyActionbarTab;
 import com.example.zhaojing5.myapplication.modelPattern.BookBean;
 import com.example.zhaojing5.myapplication.modelPattern.JsonFormatter;
 import com.example.zhaojing5.myapplication.modelPattern.XMLFormatter;
@@ -71,17 +65,20 @@ import com.example.zhaojing5.myapplication.slideMenu.SlideMenuActivity;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -104,23 +101,10 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 public class MainActivity extends AppCompatActivity{
     @BindView(R.id.btn_snackbar)
     public Button btn_snackbar;
-    public static final String TAG = MainActivity.class.getSimpleName();
+
     private Unbinder unbinder;
-    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private static Handler mHandler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what){
-                case 0:
-                    Log.i(TAG,"timeing task log " + format.format(new Date()));
-                    mHandler.sendEmptyMessageDelayed(0,3 * 1000);
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
+    public static final String TAG = MainActivity.class.getSimpleName();
+    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,38 +112,21 @@ public class MainActivity extends AppCompatActivity{
         Log.i(TAG,"--->onCreate");
         setTitle("微信");
         setContentView(R.layout.activity_main);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-            android.support.v7.app.ActionBar.TabListener listener = new MyActionbarTab<ArtistFragment>(this,"artist",ArtistFragment.class);
-            ActionBar.Tab tab = actionBar.newTab()
-                    .setText("tab1")
-                    .setTabListener(new MyActionbarTab<ArtistFragment>(this,"artist",ArtistFragment.class));
-            ActionBar.Tab tab1 = actionBar.newTab()
-                    .setText("tab2")
-                    .setTabListener(new MyActionbarTab<AlbumFragment>(this,"album",AlbumFragment.class));
-            actionBar.addTab(tab);
-            actionBar.addTab(tab1);
-        }
         unbinder = ButterKnife.bind(this);
-//        setOverflowShowingAlways();
+
         testMethos();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
+        Log.i(TAG,"--->onResume");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         Log.i(TAG,"--->onDestory");
-        /*if(mHandler != null){
-            mHandler.removeMessages(0);
-        }*/
         unbinder.unbind();
     }
 
@@ -303,9 +270,9 @@ public class MainActivity extends AppCompatActivity{
 
     @CheckResult
     private String reflect(@NonNull String param){//@NonNull会添加对值非空的提示
-        TestApplication testApplication = new TestApplication();
+        MainApplication testApplication = new MainApplication();
         try {
-            TestApplication.class.newInstance();
+            MainApplication.class.newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -544,19 +511,6 @@ public class MainActivity extends AppCompatActivity{
         Log.d(TAG,"动态");
     }
 
-    public void testModelPattern(){
-        //modelPattern
-        Log.d(TAG,"--->testModelPattern");
-        BookBean bookBean = new BookBean();
-        bookBean.setBookName("book1");
-        bookBean.setBookId("12");
-        bookBean.setPages(101);
-        XMLFormatter xmlFormatter = new XMLFormatter();
-        xmlFormatter.formatBook(bookBean);
-        JsonFormatter jsonFormatter = new JsonFormatter();
-        jsonFormatter.formatBook(bookBean);
-    }
-
     public void testSnackBar(){
         Snackbar.make(btn_snackbar,"test snackbar!",Snackbar.LENGTH_LONG)
                 .setAction("yes", new View.OnClickListener() {
@@ -772,17 +726,6 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    /*
-     randonValue is [I@225985dc
-     randonValue cloneable is [I@b0f36e5
-     */
-    public void testCloneable(){
-        int[] randomValue = new int[]{10,2,3,32,15,76,4};
-        int[] randonValueClone = randomValue.clone();
-        Log.i(TAG,"randonValue is " + randomValue);
-        Log.i(TAG,"randonValue cloneable is " + randonValueClone);
-    }
-
     private void testConcurrent(){
         ConcurrentLinkedQueue<String> concurrentLinkedQueue = new ConcurrentLinkedQueue<>();
         concurrentLinkedQueue.offer("test1");
@@ -838,36 +781,19 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void testMethos(){
+
+//        setOverflowShowingAlways();
 //        reflect("params");//@CheckResult会添加对返回值的未使用的提醒
 //        test();
-        /*new Thread(new Runnable() {
-            @Override
-            public void run() {
-                mHandler.sendEmptyMessageDelayed(0,3 * 1000);
-            }
-        }).start();*/
-        /*Intent intent = new Intent(this, TimerService.class);
-        startService(intent);*/
 //        testThreadLocal();
-        findViewById(R.id.start_float_window).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, FloatWindowService.class);
-                startService(intent);
-                finish();
-            }
-        });
-//        testModelPattern();
-        btn_callClientApk.animate().alpha(0.5f);
-//        testCloneable();
-        testConcurrent();
+//        testConcurrent();
 
-        codeStandard();
+//        MultiKnowledgePoint.testWeakYear();
+
+//        MultiKnowledgePoint.testFileVisitor(this);
+
+
 
     }
 
-    private void codeStandard(){
-        String param1 = null,param2 = null;
-        CodeStandard.func1(param1,param2);
-    }
 }

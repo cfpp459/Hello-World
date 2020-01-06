@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="RollingBarrageView">
+
+        <attr name="rollingBarrageInterval" format="integer" />
+        <attr name="rollingBarrageEnterAnim" format="reference"/>
+        <attr name="rollingBarrageLeaveAnim" format="reference"/>
+
+    </declare-styleable>
+
+</resources>

@@ -1,13 +1,11 @@
 package com.example.zhaojing5.myapplication;
 
-import android.app.ActivityManager;
 import android.app.Application;
 import android.app.Notification;
 import android.content.ComponentCallbacks;
-import android.content.Context;
-import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.util.Log;
 
 import com.facebook.cache.disk.DiskCacheConfig;
@@ -23,6 +21,8 @@ import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.listener.RequestListener;
 import com.facebook.imagepipeline.listener.RequestLoggingListener;
+import com.github.moduth.blockcanary.BlockCanary;
+import com.github.moduth.blockcanary.BlockCanaryContext;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,12 +31,13 @@ import cn.jpush.android.api.BasicPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.MultiActionsNotificationBuilder;
 
-public class TestApplication extends Application {
+public class MainApplication extends Application {
     public final String TAG = this.getClass().getSimpleName();
-    private static TestApplication instance;
+    private static MainApplication instance;
     /*application method*/
 
-    private int MAX_DISK_CACHE_SIZE = 50 * 1024 * 1024; //50MB
+    //50MB
+    private int MAX_DISK_CACHE_SIZE = 50 * 1024 * 1024;
     private ImagePipelineConfig.Builder imagePipelineConfigBuilder;
     private ImagePipelineConfig imagePipelineConfig;
 
@@ -53,6 +54,7 @@ public class TestApplication extends Application {
         setMultiNotification();
 
         initFresco();
+        initBlockCannary();
 
     }
 
@@ -60,7 +62,7 @@ public class TestApplication extends Application {
         return imagePipelineConfigBuilder;
     }
 
-    public static TestApplication getInstance(){
+    public static MainApplication getInstance(){
         return instance;
     }
 
@@ -208,7 +210,7 @@ public class TestApplication extends Application {
             }
         });
 
-        TestApplication.getInstance().getImagePipelineConfigBuilder().setMemoryTrimmableRegistry(registry);
+        MainApplication.getInstance().getImagePipelineConfigBuilder().setMemoryTrimmableRegistry(registry);
     }
 
     /**
@@ -223,6 +225,47 @@ public class TestApplication extends Application {
         imagePipeline.clearDiskCaches();
         //同时清理内存和硬盘缓存
         imagePipeline.clearCaches();
+
+    }
+
+    private void initBlockCannary(){
+        BlockCanary.install(this, new MyBlockCannaryContext()).start();
+    }
+
+
+    private class MyBlockCannaryContext extends BlockCanaryContext{
+
+        @Override
+        public String provideQualifier() {
+
+            String qualifier = "";
+
+            try {
+                // TODO: 2019/12/26 为什么flag是0 ？
+                PackageInfo packageInfo = MainApplication.this.getPackageManager().getPackageInfo(MainApplication.this.getPackageName(), 0);
+                qualifier += packageInfo.getLongVersionCode() + "_" + packageInfo.versionName + "_YYB";
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            return qualifier;
+
+        }
+
+        @Override
+        public int provideBlockThreshold() {
+            return 500;
+        }
+
+        @Override
+        public boolean displayNotification() {
+            return BuildConfig.DEBUG;
+        }
+
+        @Override
+        public boolean stopWhenDebugging() {
+            return false;
+        }
 
     }
 

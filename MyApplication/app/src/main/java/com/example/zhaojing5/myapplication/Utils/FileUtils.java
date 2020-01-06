@@ -1,9 +1,14 @@
 package com.example.zhaojing5.myapplication.Utils;
 
+import android.content.Context;
+import android.os.Environment;
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
 
 /**
  * Created by congtaowang on 2017/10/26.
@@ -26,5 +31,21 @@ public class FileUtils {
         reader.close();
         fis.close();
         return builder.toString();
+    }
+
+    public static Path getPhoneRootPath(Context context) {
+        // 是否有SD卡
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)
+                || !Environment.isExternalStorageRemovable()) {
+            // 获取SD卡根目录
+            if (context.getExternalCacheDir() == null) {
+                Log.d("zhaojing","=getPhoneRootPath is null=>");
+                return context.getCacheDir().toPath();
+            }
+            return context.getExternalCacheDir().toPath();
+        } else {
+            // 获取apk包下的缓存路径
+            return context.getCacheDir().toPath();
+        }
     }
 }
