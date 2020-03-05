@@ -1,7 +1,8 @@
 println "--->app.gradle start"
 apply plugin: 'com.android.application'
 // 添加插件
-apply plugin: 'com.mob.sdk'
+apply plugin: 'org.greenrobot.greendao'
+//apply plugin: 'com.mob.sdk'
 //apply plugin: 'com.neenbedankt.android-apt'
 
 android {
@@ -57,6 +58,12 @@ android {
     }
 }
 
+greendao{
+    schemaVersion 1
+    daoPackage 'com.example.zhaojing5.myapplication.bean.databasebean'
+    targetGenDir 'src/main/java'
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.google.code.gson:gson:2.8.5'
@@ -90,7 +97,7 @@ dependencies {
     // 仅在debug包启用BlockCanary进行卡顿监控和提示的话，可以这么用
     debugImplementation 'com.github.markzhai:blockcanary-android:1.5.0'
     releaseImplementation 'com.github.markzhai:blockcanary-no-op:1.5.0'
-
+    implementation 'org.greenrobot:greendao:3.2.2'
 
 
 }
