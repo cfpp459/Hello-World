@@ -8,6 +8,17 @@ import java.math.BigDecimal;
 
 public class CommonUtils {
 
+
+    public static <T> T cast(Object obj){
+        try{
+            return (T) obj;
+        }catch (ClassCastException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
     /**
      * get appointed size bitmap.
      * @param bitmap
