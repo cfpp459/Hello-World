@@ -13,9 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.zhaojing5.myapplication.R;
 import com.example.zhaojing5.myapplication.Utils.ToastUtils;
 import com.example.zhaojing5.myapplication.activity.LoginActivity;
+import com.example.zhaojing5.myapplication.arouter.ARouterConstant;
 
 import javax.crypto.Cipher;
 
@@ -25,6 +27,7 @@ import javax.crypto.Cipher;
  * 8.0上加入了最大20次的限制，累计错误20次之后就无法使用指纹认证功能了，只能用密码的方式才能重置错误计数
  * 9.0之后FingerprintManager被抛弃了
  */
+@Route(path = ARouterConstant.mARouterPathFragmentOne, group = ARouterConstant.ACTIVITY_GROUP)
 @TargetApi(23)
 public class FingerDialogFragment extends DialogFragment {
 

@@ -45,33 +45,34 @@ import android.view.animation.BounceInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.Postcard;
+import com.alibaba.android.arouter.facade.callback.NavCallback;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.zhaojing5.myapplication.BuildConfig;
 import com.example.zhaojing5.myapplication.R;
 import com.example.zhaojing5.myapplication.MainApplication;
 import com.example.zhaojing5.myapplication.Utils.FileUtils;
-import com.example.zhaojing5.myapplication.Utils.FileVisitorUtil;
-import com.example.zhaojing5.myapplication.Utils.MultiKnowledgePoint;
 import com.example.zhaojing5.myapplication.Utils.ToastUtils;
 import com.example.zhaojing5.myapplication.View.UseHttpActivity;
+import com.example.zhaojing5.myapplication.arouter.ARouterConstant;
+import com.example.zhaojing5.myapplication.arouter.ARouterInfo;
+import com.example.zhaojing5.myapplication.arouter.TestProvider;
 import com.example.zhaojing5.myapplication.bean.UserInfo;
 import com.example.zhaojing5.myapplication.dl.ProxyActivity;
+import com.example.zhaojing5.myapplication.fragment.FingerDialogFragment;
 import com.example.zhaojing5.myapplication.fresco.TestFrescoActivity;
-import com.example.zhaojing5.myapplication.modelPattern.BookBean;
-import com.example.zhaojing5.myapplication.modelPattern.JsonFormatter;
-import com.example.zhaojing5.myapplication.modelPattern.XMLFormatter;
 import com.example.zhaojing5.myapplication.slideMenu.SlideMenuActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -105,6 +106,7 @@ public class MainActivity extends AppCompatActivity{
     private Unbinder unbinder;
     public static final String TAG = MainActivity.class.getSimpleName();
     private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+    int mARouterRequestCode = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,11 +135,14 @@ public class MainActivity extends AppCompatActivity{
     @OnClick({R.id.btn_popView,R.id.btn_callClientApk,R.id.start_slide_menu,R.id.btn_snackbar,
             R.id.btn_notification,R.id.btn_volley,R.id.btn_goto_count_view,R.id.btn_sliding_menu,
             R.id.btn_rotate_pic,R.id.btn_three_d,R.id.btn_distribute,R.id.btn_my3d,R.id.btn_goto_finger,
-            R.id.btn_pullable_layout,R.id.btn_loopimageview,R.id.btn_fresco,R.id.btn_rxjava})
+            R.id.btn_pullable_layout,R.id.btn_loopimageview,R.id.btn_fresco,R.id.btn_rxjava, R.id.btn_arouter})
     public void onClick(View v) {
         Log.d(TAG,"click view " + v.getId());
         Intent intent = null;
         switch(v.getId()){
+            case R.id.btn_arouter:
+                naviWithARouter();
+                break;
             case R.id.btn_rxjava:
                 startActivity(new Intent(this, RxJavaActivity.class));
                 break;
@@ -198,7 +203,53 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    private void naviWithARouter(){
 
+//        ARouter.getInstance().build(ARouterConstant.mARouterPathActivityOne).navigation();
+
+//        ARouter.getInstance().build(ARouterConstant.mARouterPathActivityOne).navigation(this, mARouterRequestCode);
+
+        ARouter.getInstance().build(ARouterConstant.mARouterPathActivityOne, ARouterConstant.ACTIVITY_GROUP)
+                .withString("key1","张三")
+                .withInt("key2", 18)
+                .withObject("key3", new ARouterInfo(format.format(new Date()), "使用感受：直观简单", 4))
+                .navigation(this, mARouterRequestCode, new NavCallback() {
+                    @Override
+                    public void onArrival(Postcard postcard) {
+                        Log.i(TAG, "onArrival...");
+                        Log.i(TAG, "默认分组：" + postcard.getGroup());
+                        Log.i(TAG, "extras is " + postcard.getExtra());
+                    }
+
+                    @Override
+                    public void onFound(Postcard postcard) {
+                        super.onFound(postcard);
+                        Log.i(TAG, "onFound...");
+                    }
+
+                    @Override
+                    public void onLost(Postcard postcard) {
+                        super.onLost(postcard);
+                        Log.i(TAG, "onLost...");
+                    }
+
+                    @Override
+                    public void onInterrupt(Postcard postcard) {
+                        super.onInterrupt(postcard);
+                        Log.i(TAG, "onInterrupt...");
+                    }
+                });
+
+        //fragment中使用ARouter
+//        FingerDialogFragment fingerDialogFragment = (FingerDialogFragment) ARouter.getInstance()
+//                .build(ARouterConstant.mARouterPathFragmentOne, ARouterConstant.ACTIVITY_GROUP)
+//                .navigation();
+//        fingerDialogFragment.show(getFragmentManager(), "FingerDialogFragment");
+
+//        String returnStr = ARouter.getInstance().navigation(TestProvider.class).test();
+//        ToastUtils.showToast(this, returnStr);
+
+    }
 
     public void test(){
         /**
@@ -796,4 +847,19 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        super.startActivityForResult(intent, requestCode);
+        Log.i(TAG,"startActivityForResult requestCode is " + requestCode);
+
+        if(requestCode == mARouterRequestCode){
+
+            if (intent != null) {
+                String resultInfo = intent.getStringExtra("ARouter_Result_Key");
+                Log.i("TAG","startActivityForResult requestCode is " + requestCode + ", resultInfo is " + resultInfo);
+            }
+
+        }
+
+    }
 }

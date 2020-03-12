@@ -62,6 +62,7 @@
         <activity android:name=".activity.LooperImageViewActivity"/>
         <activity android:name=".fresco.TestFrescoActivity"/>
         <activity android:name=".activity.RxJavaActivity"/>
+        <activity android:name=".arouter.ActivityOne"/>
 
         <!-- service -->
         <service android:name=".service.JPushMessageService"/>
