@@ -14,7 +14,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+                arguments = [ AROUTER_MODULE_NAME : project.getName()]
+            }
+        }
 
         ndk{
             abiFilters 'armeabi'
@@ -99,6 +104,12 @@ dependencies {
     releaseImplementation 'com.github.markzhai:blockcanary-no-op:1.5.0'
     implementation 'org.greenrobot:greendao:3.2.2'
 
+    //ARouter
+    implementation 'com.alibaba:arouter-api:1.5.0'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
+    //fastJson
+    implementation 'com.alibaba:fastjson:1.1.71.android'
 
 }
 

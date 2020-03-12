@@ -1,5 +1,6 @@
 package com.example.zhaojing5.myapplication;
 
+import android.annotation.TargetApi;
 import android.app.Application;
 import android.app.Notification;
 import android.content.ComponentCallbacks;
@@ -8,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.util.Log;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.common.internal.Supplier;
 import com.facebook.common.logging.FLog;
@@ -55,6 +57,7 @@ public class MainApplication extends Application {
 
         initFresco();
         initBlockCannary();
+        initARouter();
 
     }
 
@@ -235,6 +238,7 @@ public class MainApplication extends Application {
 
     private class MyBlockCannaryContext extends BlockCanaryContext{
 
+        @TargetApi(28)
         @Override
         public String provideQualifier() {
 
@@ -268,5 +272,24 @@ public class MainApplication extends Application {
         }
 
     }
+
+    private void initARouter(){
+        if(BuildConfig.DEBUG){
+            ARouter.openLog();
+            ARouter.openDebug();
+        }
+
+        ARouter.init(this);
+
+        //关闭路由
+//        ARouter.getInstance().destroy();
+
+    }
+
+
+
+
+
+
 
 }
