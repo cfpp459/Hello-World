@@ -63,6 +63,7 @@
         <activity android:name=".fresco.TestFrescoActivity"/>
         <activity android:name=".activity.RxJavaActivity"/>
         <activity android:name=".arouter.ActivityOne"/>
+        <activity android:name=".annotation.TextAnnotationActivity"/>
 
         <!-- service -->
         <service android:name=".service.JPushMessageService"/>
