@@ -56,6 +56,7 @@ import com.example.zhaojing5.myapplication.MainApplication;
 import com.example.zhaojing5.myapplication.Utils.FileUtils;
 import com.example.zhaojing5.myapplication.Utils.ToastUtils;
 import com.example.zhaojing5.myapplication.View.UseHttpActivity;
+import com.example.zhaojing5.myapplication.annotation.TextAnnotationActivity;
 import com.example.zhaojing5.myapplication.arouter.ARouterConstant;
 import com.example.zhaojing5.myapplication.arouter.ARouterInfo;
 import com.example.zhaojing5.myapplication.arouter.TestProvider;
@@ -135,11 +136,15 @@ public class MainActivity extends AppCompatActivity{
     @OnClick({R.id.btn_popView,R.id.btn_callClientApk,R.id.start_slide_menu,R.id.btn_snackbar,
             R.id.btn_notification,R.id.btn_volley,R.id.btn_goto_count_view,R.id.btn_sliding_menu,
             R.id.btn_rotate_pic,R.id.btn_three_d,R.id.btn_distribute,R.id.btn_my3d,R.id.btn_goto_finger,
-            R.id.btn_pullable_layout,R.id.btn_loopimageview,R.id.btn_fresco,R.id.btn_rxjava, R.id.btn_arouter})
+            R.id.btn_pullable_layout,R.id.btn_loopimageview,R.id.btn_fresco,R.id.btn_rxjava, R.id.btn_arouter,
+            R.id.btn_inflect_and_invocation})
     public void onClick(View v) {
         Log.d(TAG,"click view " + v.getId());
         Intent intent = null;
         switch(v.getId()){
+            case R.id.btn_inflect_and_invocation:
+                startActivity(new Intent(this, TextAnnotationActivity.class));
+                break;
             case R.id.btn_arouter:
                 naviWithARouter();
                 break;
