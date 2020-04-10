@@ -1,14 +1,45 @@
 package com.example.zhaojing5.myapplication.Utils;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.text.TextUtils;
 
 import java.math.BigDecimal;
 
 public class CommonUtils {
 
 
+    /**
+     * Intent隐式调用Activity时防止抛出ActivityNotFoundException
+     * 所以要先查一下该Activity是否存在
+     * @param context
+     * @param intent
+     * @return
+     */
+    public static boolean isActivityExist(Context context, Intent intent){
+
+        if (context != null && intent != null) {
+            ResolveInfo resolveInfo = context.getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+            if (resolveInfo != null && resolveInfo.activityInfo != null) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+    /***
+     * 强转封装，捕获异常，并取消类型检查提示
+     * @param obj
+     * @param <T>
+     * @return
+     */
     public static <T> T cast(Object obj){
         try{
             return (T) obj;
