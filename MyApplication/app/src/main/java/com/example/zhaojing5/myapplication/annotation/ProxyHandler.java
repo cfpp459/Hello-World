@@ -17,7 +17,6 @@ public class ProxyHandler implements InvocationHandler {
     private WeakReference<Activity> mActivity;
     private HashMap<String, Method> mMethodHashMap;
 
-
     public ProxyHandler(Activity activity){
         mActivity = new WeakReference<>(activity);
         mMethodHashMap = new HashMap<>();
